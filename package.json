@@ -1,0 +1,39 @@
+{
+  "name": "nowexpress",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "start:dev": "NODE_ENV=dev nodemon ./bin/www",
+    "start:production": "NODE_ENV=production nodemon ./bin/www",
+    "swagger": "node ./swagger.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^16.0.0",
+    "express": "^4.16.4",
+    "express-session": "^1.17.3",
+    "image-size": "^1.0.1",
+    "imgur": "^2.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.3.3",
+    "morgan": "~1.9.1",
+    "multer": "^1.4.4-lts.1",
+    "passport": "^0.5.2",
+    "passport-google-oauth20": "^2.0.0",
+    "swagger-autogen": "^2.5.10",
+    "swagger-ui-express": "^4.4.0",
+    "tslib": "^2.4.0",
+    "validator": "^13.7.0"
+  },
+  "main": "app.js",
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
