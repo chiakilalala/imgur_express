@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "start:dev": "NODE_ENV=dev nodemon ./bin/www",
-    "start:production": "NODE_ENV=production nodemon ./bin/www",
+    "start": "node ./bin/www",
+    "start:dev": "NODE_ENV=dev node ./bin/www",
+    "start:production": "NODE_ENV=production node ./bin/www",
     "swagger": "node ./swagger.js"
   },
   "dependencies": {
