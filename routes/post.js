@@ -11,7 +11,6 @@ router.get('/post/user/:userID',isAuth, PostController.getPosts);
 //取得單一貼文
 router.get('/posts/:id',isAuth, PostController.getOnePost);
 
-
 //新增貼文
 router.post('/posts',isAuth, PostController.creatPosts);
 //新增點讚

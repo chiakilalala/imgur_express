@@ -33,8 +33,8 @@ const userSchema = new mongoose.Schema({
         },
         select: false
     }
-  ],
-  following: [
+    ],
+    following: [
     {
       user: { 
         type: mongoose.Schema.ObjectId, 
@@ -45,8 +45,10 @@ const userSchema = new mongoose.Schema({
       },
       select: false
     }
-  ],
-    googleId:String,
+    ],
+    googleId:{
+      type:String
+    }
   });
 // User
 const User = mongoose.model('user', userSchema);

@@ -69,20 +69,26 @@ successhandle(res,'成功取消對方',unfollowuser);
 }),
 
 getFollowList:handleErrorAsync(async(req,res,next)=>{
- let followerId = req.user.id.toString();
+  const { _id } = req.user
+//  let followerId = req.user._id.toString();
 console.log(req)
- if(!followerId){
-  return next(appError(400, '摩有～～～', next));
- }
- const followList = await Users.findById(
-  followerId
-   )
-  .populate({
-      path: "following.user",
-      select: "name",
-    })
- console.error(followList);
- successhandle(res,'個人追蹤名單',followList);
+//  if(!followerId){
+//   return next(appError(400, '摩有～～～', next));
+//  }
+const { posts }= await LikesPost.findOne({ userId: _id }).populate({
+  path: 'posts',
+  select: '_id author content imageUrls createdAt',
+  populate: { path: 'author', select: 'name avator' },
+})
+//  const followList = await Users.findById(
+//   followerId
+//    )
+//   .populate({
+//       path: "following.user",
+//       select: "name",
+//     })
+//  console.error(followList);
+ successhandle(res,'個人追蹤名單',posts);
 })
 }
 

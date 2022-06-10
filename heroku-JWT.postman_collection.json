@@ -553,30 +553,6 @@
 			]
 		},
 		{
-			"name": "New Request",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "{{Authorization}}",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{url}}/users/google",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"users",
-						"google"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "上傳圖片",
 			"request": {
 				"method": "POST",

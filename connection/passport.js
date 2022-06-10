@@ -17,7 +17,8 @@ passport.use(new GoogleStrategy(
   },
   async(accessToken, refreshToken, profile, cb)=> {
       const user = await Users.findOne({ googleId: profile.id });
-      console.log( profile,'profile')
+      console.log(user )
+      //console.log( profile,'profile')
       if(user) {
         console.log('使用者已存在');
         return cb(null, user);

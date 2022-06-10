@@ -16,11 +16,11 @@ const  Upload = {
       return appError(400, '尚未上傳檔案', next);
     }
       // 檢測圖片尺寸
-    // const dimensions = sizeOf(req.files[0].buffer);
-    // if(dimensions.width !== dimensions.height) {
+    const dimensions = sizeOf(req.files[0].buffer);
+    if(dimensions.width !== dimensions.height) {
       
-    //     return appError(400, '圖片長寬不符合 1:1 尺寸', next);
-    // }
+        return appError(400, '圖片長寬不符合 1:1 尺寸', next);
+    }
     // 加入申請好的 imgur client 資訊
     const client = new ImgurClient({
       clientId: process.env.IMGUR_CLIENT_ID,

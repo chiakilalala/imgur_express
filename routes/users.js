@@ -43,6 +43,7 @@ router.get('/google', passport.authenticate('google', {
 
 router.get('/google/callback', passport.authenticate('google', { session: false }), (req, res) => {
   generateUrlJWT(req.user, res);
+  console.log(res)
 })
  
 
