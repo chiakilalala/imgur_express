@@ -73,13 +73,19 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTNhMTFjZTJlZGEwMzQ5OGM2NGI0OCIsImlhdCI6MTY1Mzg0NzY0MCwiZXhwIjoxNjU0NDUyNDQwfQ.GU0bymbRxYwNZlFmtmMgnX7Tzv59ReuACFQVzZgRsGM",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTRhMWY3MDM0MTk4ZDk4MTFmOTU5YyIsImlhdCI6MTY1NDk0MzY0MywiZXhwIjoxNjU1NTQ4NDQzfQ.RHqsez2N5IBNqPk3dTgw_wjWuR3Xk4kYAisYR_iqw54",
 								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}",
+								"type": "text",
+								"disabled": true
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"password\":\"1qaz@WSX\", \n    \"confirmPassword\":\"1qaz@WSX\"\n}",
+							"raw": "{\n    \"password\":\"2wsx3edc\", \n    \"confirmPassword\":\"1qaz@WSX\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -87,13 +93,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/updatePassword/6293a11ce2eda03498c64b48",
+							"raw": "{{url}}/users/updatePassword/{{userID}}",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
+								"users",
 								"updatePassword",
-								"6293a11ce2eda03498c64b48"
+								"{{userID}}"
 							]
 						}
 					},
@@ -181,9 +188,9 @@
 			"name": "動態貼文",
 			"item": [
 				{
-					"name": "張貼個人貼文",
+					"name": "取得所有貼文",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
@@ -191,9 +198,62 @@
 								"type": "text"
 							}
 						],
+						"url": {
+							"raw": "{{url}}/posts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得單一貼文",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/posts/{{postID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"posts",
+								"{{postID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增貼文",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTRhMWY3MDM0MTk4ZDk4MTFmOTU5YyIsImlhdCI6MTY1NDk5Nzc2MiwiZXhwIjoxNjU1NjAyNTYyfQ.ZPoPkQm_C1KOk2FyAFTmVWTBJAmJNproJbwyMSVSBLI",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\":\"阿里媽媽嗎\",\n    \"content\":\"想去樂園2\",\n    \"image\":\"123.jpg\"\n}",
+							"raw": "{\n   \n    \"content\":\"多壁球不好玩\",\n    \"image\":\"12l\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -220,17 +280,23 @@
 							{
 								"key": "Authorization",
 								"value": "{{Authorization}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTRhMWY3MDM0MTk4ZDk4MTFmOTU5YyIsImlhdCI6MTY1NDk5Nzc2MiwiZXhwIjoxNjU1NjAyNTYyfQ.ZPoPkQm_C1KOk2FyAFTmVWTBJAmJNproJbwyMSVSBLI",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{url}}/posts/{{postID}}/like",
+							"raw": "{{url}}/posts/62a540155cf26e2432c9046a/like",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"posts",
-								"{{postID}}",
+								"62a540155cf26e2432c9046a",
 								"like"
 							]
 						}
@@ -257,30 +323,6 @@
 								"posts",
 								"{{postID}}",
 								"like"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "取得單一貼文",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{Authorization}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/posts/{{postID}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"posts",
-								"{{postID}}"
 							]
 						}
 					},
@@ -317,29 +359,6 @@
 							"path": [
 								"users",
 								"allusers"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "觀看所有人動態",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTNhMTFjZTJlZGEwMzQ5OGM2NGI0OCIsImlhdCI6MTY1Mzg3NjEwNywiZXhwIjoxNjU0NDgwOTA3fQ.Gf6WOZkxeTIPxwZ0DSq2dfNomzMgkPBn6fxdEfqnL5M",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/posts",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"posts"
 							]
 						}
 					},
@@ -393,13 +412,13 @@
 							{
 								"key": "Authorization",
 								"value": "{{Authorization}}",
-								"type": "text",
-								"disabled": true
+								"type": "text"
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTRhMWY3MDM0MTk4ZDk4MTFmOTU5YyIsImlhdCI6MTY1NDAxNTQ1NSwiZXhwIjoxNjU0NjIwMjU1fQ.sAokWVaLYm83H8iviBEswRI-mMolU6vc4sPGMbTuDW8",
-								"type": "text"
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTRhMWY3MDM0MTk4ZDk4MTFmOTU5YyIsImlhdCI6MTY1NDk5Nzc2MiwiZXhwIjoxNjU1NjAyNTYyfQ.ZPoPkQm_C1KOk2FyAFTmVWTBJAmJNproJbwyMSVSBLI",
+								"type": "text",
+								"disabled": true
 							}
 						],
 						"url": {
@@ -446,12 +465,83 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "刪除所有貼文",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/posts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刪除單筆貼文",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/posts/{{postID}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"posts",
+								"{{postID}}"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "會員按讚追蹤動態",
 			"item": [
+				{
+					"name": "取得個人按讚列表",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{Authorization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/users/getLikeList",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"getLikeList"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "追蹤朋友",
 					"request": {
@@ -472,30 +562,6 @@
 								"users",
 								"{{userID}}",
 								"follow"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "取得個人按讚列表",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{Authorization}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/users/getLikeList",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"users",
-								"getLikeList"
 							]
 						}
 					},

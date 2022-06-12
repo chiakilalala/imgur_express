@@ -37,34 +37,38 @@ const follows = {
        $addToSet: { followers: { user: UserId } }
      }
  );
- const followuser = await Users.findById({ _id: UserId })
+ const followuser = await Users.findById({ _id:UserId })
  successhandle(res,'追蹤成功',followuser);
  
 }),
 UnFollow:handleErrorAsync(async(req,res,next)=>{
- const followIngId = req.user.id;
- const followersId = req.params.id;
- if ( req.params.id === followIngId) {
+ const UserId = req.user.id;
+ const unfolloweUserId = req.params.id;
+ if ( unfolloweUserId === UserId) {
        return next( appError(401, '不可取消追蹤自己', next))
  } 
+ const findUser = await Users.findById( unfolloweUserId);
+ if (!findUser) {
+   return next( appError(401, '取消追蹤的用戶不存在', next))
+ }  
  // 調整自己的 following 追蹤者，移除 req.params.id
- await Users.updateOne(
+ const unfollowings = {
+  $pull: { following: { user: unfolloweUserId } },
+};
+ await Users.findByIdAndUpdate(
    {
-     _id:followIngId,
-     'following.user':{$ne:followersId} //$ne不等於
-   },
-   {
-     $pull:{followIng:{user:followersId}}
+     _id:unfolloweUserId,
+     unfollowings
    }
  );
  //調整對方的 followers，移除自己的 id
- await Users.updateOne(
+ const unfollowers = {
+  $pull: { followers: { user: UserId } },
+};
+ await Users.findByIdAndUpdate(
   {
-    _id: followersId,
-    'followers.user': { $ne: followIngId }
-  },
-  {
-    $pull: { followers: { user: followIngId } }
+    _id:unfolloweUserId,
+    unfollowers
   }
 );
 const unfollowuser = await Users.findById({ _id: req.user.id })

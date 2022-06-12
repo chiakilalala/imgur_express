@@ -10,7 +10,7 @@ const isAuth =handleErrorAsync(async (req,res,next)=>{
     let token;
     if ( req.headers.authorization&&  req.headers.authorization.startsWith('Bearer')){
        token =  req.headers.authorization.split(' ')[1];
-       console.log(req.headers.authorization)
+       //console.log(req.headers.authorization)
     } else{
       return next(appError(401, '查無 TOKEN', next))
     }
@@ -37,7 +37,7 @@ const generateSendJWT =(user, statusCode,res)=>{
   const token =jwt.sign({id:user._id},process.env.JWT_SECRET,{
         expiresIn: process.env.JWT_EXPIRES_DAY
   });
-  console.log(token)
+  //console.log(token)
   user.password =undefined;
   res.status(statusCode).json({
           status:'success',
@@ -54,7 +54,7 @@ const generateUrlJWT =(user, statusCode,res)=>{
   const token =jwt.sign({id:user._id},process.env.JWT_SECRET,{
         expiresIn: process.env.JWT_EXPIRES_DAY
   });
-  console.log(token)
+  //console.log(token)
   //重新導向到前端
 
   res.redirect(`/callback?token=${token}&name=${user.name}`)
