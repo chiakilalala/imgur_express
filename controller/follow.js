@@ -8,32 +8,36 @@ const Users = require('../models/userModel');
 
 const follows = {
   postFollow:handleErrorAsync(async(req,res,next)=>{
-    const followIngId = req.user.id;
+    const UserId = req.user.id;
     const followersId = req.params.id;
-    if ( req.params.id === followIngId) {
+    if ( followersId === UserId) {
           return next( appError(401, '您無法追蹤自己', next))
+    } 
+    const findUser = await Users.findById(followersId);
+    if (!findUser) {
+      return next( appError(401, '追蹤的用戶不存在', next))
     } 
     // 調整自己的 following 追蹤者，加入 req.params.id
     await Users.updateOne(
       {
-        _id:followIngId,
+        _id:UserId,
         'following.user':{$ne:followersId} //$ne不等於
       },
       {
-        $addToSet:{followIng:{user:followersId}}
+        $addToSet:{ following:{ user: followersId }}
       }
     );
     //調整對方的 followers，加上自己的 id
     await Users.updateOne(
      {
        _id: followersId,
-       'followers.user': { $ne: followIngId }
+       'followers.user': { $ne:UserId }
      },
      {
-       $addToSet: { followers: { user: followIngId } }
+       $addToSet: { followers: { user: UserId } }
      }
  );
- const followuser = await Users.findById({ _id: req.user.id })
+ const followuser = await Users.findById({ _id: UserId })
  successhandle(res,'追蹤成功',followuser);
  
 }),
