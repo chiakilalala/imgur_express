@@ -33,7 +33,7 @@ const  Upload = {
       type: 'base64',
       album: process.env.IMGUR_ALBUM_ID
     });
-    console.log(response)
+   
     successhandle(res, '資料讀取成功', { url: response.data.link });
 
 

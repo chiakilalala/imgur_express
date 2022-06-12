@@ -9,7 +9,7 @@ const postSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      default: ""
+      required: false,
     },
     createdAt: {
       type: Date,
@@ -22,7 +22,7 @@ const postSchema = new mongoose.Schema(
     likes: [
       { 
         type: mongoose.Schema.ObjectId, 
-        ref: 'user' 
+        ref: 'user' // id要去找user的那張表的ID
       }
     ],
     
